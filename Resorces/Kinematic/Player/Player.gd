@@ -155,5 +155,3 @@ func calculate_move_velocity(linear_velocity: Vector2, speed: Vector2, direction
 		out.y = 600
 	
 	return out
-
-
