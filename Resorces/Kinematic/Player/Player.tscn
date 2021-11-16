@@ -1,0 +1,251 @@
+[gd_scene load_steps=56 format=2]
+
+[ext_resource path="res://Assets/Player/Sprite/adventurer-idle-00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-idle-01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-jump-00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-jump-01.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-jump-02.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-run-00.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-run-01.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-jump-03.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-run-02.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-fall-00.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-run-05.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-fall-01.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-run-03.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-run-04.png" type="Texture" id=14]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/run_0.tres" type="Animation" id=15]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/idle_0.tres" type="Animation" id=16]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/jump.tres" type="Animation" id=17]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/jump_loop.tres" type="Animation" id=18]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/fall.tres" type="Animation" id=19]
+[ext_resource path="res://Resorces/Kinematic/Player/Player.gd" type="Script" id=20]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-grb-02.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-grb-00.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-grb-01.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-grb-03.png" type="Texture" id=24]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/corner_grab.tres" type="Animation" id=25]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-clmb-04.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-clmb-02.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-clmb-03.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-walk-00.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-clmb-01.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crnr-clmb-00.png" type="Texture" id=31]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/corner_climb.tres" type="Animation" id=32]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-idle-03.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-idle-02.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-smrslt-02.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-smrslt-01.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-smrslt-03.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-smrslt-00.png" type="Texture" id=38]
+[ext_resource path="res://Resorces/Kinematic/Player/Animations/flip.tres" type="Animation" id=39]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 38 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 37 ) ],
+"loop": true,
+"name": "flip",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "run_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "corner_grab",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 34 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "idle_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "jump_loop",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "corner_climb",
+"speed": 5.0
+} ]
+
+[sub_resource type="AnimationNodeTransition" id=2]
+input_count = 2
+input_0/name = "jump"
+input_0/auto_advance = false
+input_1/name = "fall"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "corner_climb"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "corner_grab"
+
+[sub_resource type="AnimationNodeTransition" id=18]
+input_count = 2
+input_0/name = "normal_jump"
+input_0/auto_advance = false
+input_1/name = "flip_jump"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "flip"
+
+[sub_resource type="AnimationNodeTransition" id=17]
+input_count = 2
+input_0/name = "Grab"
+input_0/auto_advance = false
+input_1/name = "Climb"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle_0"
+
+[sub_resource type="AnimationNodeTimeScale" id=8]
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "jump_loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=10]
+
+[sub_resource type="AnimationNodeTransition" id=11]
+input_count = 2
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_1/name = "Run"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "run_0"
+
+[sub_resource type="AnimationNodeTransition" id=13]
+input_count = 4
+input_0/name = "Ground"
+input_0/auto_advance = false
+input_1/name = "Air"
+input_1/auto_advance = false
+input_2/name = "Climb"
+input_2/auto_advance = false
+input_3/name = "Rope"
+input_3/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=14]
+graph_offset = Vector2( -420.125, 121.456 )
+nodes/Air/node = SubResource( 2 )
+nodes/Air/position = Vector2( 460, 200 )
+nodes/CornerClimb/node = SubResource( 4 )
+nodes/CornerClimb/position = Vector2( 320, 620 )
+nodes/CornerGrab/node = SubResource( 5 )
+nodes/CornerGrab/position = Vector2( 320, 500 )
+nodes/DoubleJump/node = SubResource( 18 )
+nodes/DoubleJump/position = Vector2( 106.667, 266.667 )
+nodes/Fall/node = SubResource( 6 )
+nodes/Fall/position = Vector2( 260, 360 )
+nodes/Flip/node = SubResource( 15 )
+nodes/Flip/position = Vector2( -140, 380 )
+nodes/Grabbing/node = SubResource( 17 )
+nodes/Grabbing/position = Vector2( 586.667, 453.333 )
+nodes/Idle/node = SubResource( 7 )
+nodes/Idle/position = Vector2( -140, -60 )
+nodes/IdleScale/node = SubResource( 8 )
+nodes/IdleScale/position = Vector2( 80, -40 )
+nodes/JumpLoop/node = SubResource( 9 )
+nodes/JumpLoop/position = Vector2( -140, 240 )
+nodes/MoveScale/node = SubResource( 10 )
+nodes/MoveScale/position = Vector2( 80, 100 )
+nodes/Movement/node = SubResource( 11 )
+nodes/Movement/position = Vector2( 340, 0 )
+nodes/Run/node = SubResource( 12 )
+nodes/Run/position = Vector2( -140, 80 )
+nodes/State/node = SubResource( 13 )
+nodes/State/position = Vector2( 800, 220 )
+nodes/output/position = Vector2( 1100, 220 )
+node_connections = [ "output", 0, "State", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "MoveScale", 0, "Run", "IdleScale", 0, "Idle", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing" ]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 20 )
+gravity = 650.0
+speed = Vector2( 100, 150 )
+crouch_speed = 20
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -18 )
+frames = SubResource( 1 )
+animation = "jump"
+frame = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -16 )
+polygon = PoolVector2Array( 0, 16, 4, 16, 6, 16, 6, 0, 6, -11, 2.09253, -14.2562, 0, -15, -2.06273, -14.2811, -6, -11, -6, 0, -6, 16, -4, 16 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Air/current = 0
+parameters/DoubleJump/current = 0
+parameters/Grabbing/current = 0
+parameters/IdleScale/scale = 0.6
+parameters/MoveScale/scale = 1.0
+parameters/Movement/current = 0
+parameters/State/current = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/corner_climb = ExtResource( 32 )
+anims/corner_grab = ExtResource( 25 )
+anims/fall = ExtResource( 19 )
+anims/flip = ExtResource( 39 )
+anims/idle_0 = ExtResource( 16 )
+anims/jump_0 = ExtResource( 17 )
+anims/jump_loop = ExtResource( 18 )
+anims/run_0 = ExtResource( 15 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.4, 0.4 )
+
+[node name="Grabing" type="Node2D" parent="."]
+
+[node name="Vertical" type="RayCast2D" parent="Grabing"]
+position = Vector2( 7, -34 )
+cast_to = Vector2( 0, 12 )
+
+[node name="Horizontal" type="RayCast2D" parent="Grabing"]
+position = Vector2( 3, -27 )
+cast_to = Vector2( 10, 0 )
+
+[node name="InversedVertical" type="RayCast2D" parent="Grabing"]
+position = Vector2( 7, -34 )
+cast_to = Vector2( 0, -20 )
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="GroundLeft" type="RayCast2D" parent="Ground"]
+position = Vector2( -5, 0 )
+cast_to = Vector2( 0, 5 )
+
+[node name="GroundRight" type="RayCast2D" parent="Ground"]
+position = Vector2( 5, 0 )
+cast_to = Vector2( 0, 5 )
