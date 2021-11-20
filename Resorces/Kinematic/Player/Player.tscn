@@ -52,19 +52,9 @@ animations = [ {
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "run_0",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ) ],
 "loop": true,
 "name": "corner_grab",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 34 ), ExtResource( 33 ) ],
-"loop": true,
-"name": "idle_0",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ) ],
@@ -80,6 +70,16 @@ animations = [ {
 "frames": [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ) ],
 "loop": true,
 "name": "corner_climb",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "run_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 34 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "idle_0",
 "speed": 5.0
 } ]
 
@@ -178,9 +178,10 @@ nodes/Run/position = Vector2( -140, 80 )
 nodes/State/node = SubResource( 13 )
 nodes/State/position = Vector2( 800, 220 )
 nodes/output/position = Vector2( 1100, 220 )
-node_connections = [ "output", 0, "State", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "MoveScale", 0, "Run", "IdleScale", 0, "Idle", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing" ]
+node_connections = [ "output", 0, "State", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "IdleScale", 0, "Idle", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb", "MoveScale", 0, "Run", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing" ]
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 6
 script = ExtResource( 20 )
 gravity = 650.0
 speed = Vector2( 100, 150 )
@@ -235,21 +236,26 @@ drag_margin_bottom = 0.5
 [node name="Vertical" type="RayCast2D" parent="Grabing"]
 position = Vector2( 7, -34 )
 cast_to = Vector2( 0, 12 )
+collision_mask = 2
 
 [node name="Horizontal" type="RayCast2D" parent="Grabing"]
 position = Vector2( 3, -27 )
 cast_to = Vector2( 10, 0 )
+collision_mask = 2
 
 [node name="InversedVertical" type="RayCast2D" parent="Grabing"]
 position = Vector2( 7, -34 )
 cast_to = Vector2( 0, -20 )
+collision_mask = 2
 
 [node name="Ground" type="Node2D" parent="."]
 
 [node name="GroundLeft" type="RayCast2D" parent="Ground"]
 position = Vector2( -5, 0 )
 cast_to = Vector2( 0, 5 )
+collision_mask = 2
 
 [node name="GroundRight" type="RayCast2D" parent="Ground"]
 position = Vector2( 5, 0 )
 cast_to = Vector2( 0, 5 )
+collision_mask = 2
