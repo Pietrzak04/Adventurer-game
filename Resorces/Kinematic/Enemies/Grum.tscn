@@ -1,0 +1,203 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://Assets/Enemies/Grum/idle05.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Enemies/Grum/idle02.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enemies/Grum/idle06.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Enemies/Grum/idle04.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Enemies/Grum/idle01.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Enemies/Grum/idle03.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Enemies/Grum/idle09.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Enemies/Grum/attack06.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Enemies/Grum/walk07.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Enemies/Grum/walk03.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Enemies/Grum/attack08.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Enemies/Grum/walk06.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Enemies/Grum/walk04.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Enemies/Grum/attack02.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Enemies/Grum/attack05.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Enemies/Grum/attack04.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Enemies/Grum/walk01.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Enemies/Grum/walk05.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Enemies/Grum/walk02.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Enemies/Grum/walk08.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Enemies/Grum/attack01.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Enemies/Grum/attack03.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Enemies/Grum/attack07.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Enemies/Grum/idle10.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Enemies/Grum/idle11.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Enemies/Grum/idle07.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Enemies/Grum/idle08.png" type="Texture" id=27]
+[ext_resource path="res://Resorces/Kinematic/Enemies/Grum.gd" type="Script" id=28]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 7 ), ExtResource( 24 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 19 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 18 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 14 ), ExtResource( 22 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 8 ), ExtResource( 23 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 9 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "attack" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[node name="Grum" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 28 )
+gravity = 650.0
+speed = Vector2( 100, 100 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -9 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 3 )
+anims/attack = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/walk = SubResource( 6 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="StateTimer" type="Timer" parent="Timers"]
+
+[node name="JumpDetector" type="RayCast2D" parent="."]
+position = Vector2( 6, -18 )
+cast_to = Vector2( 10, 0 )
+collision_mask = 3
+
+[node name="JumpDetector2" type="RayCast2D" parent="."]
+position = Vector2( 6, -10 )
+cast_to = Vector2( 10, 0 )
+collision_mask = 3
+
+[connection signal="timeout" from="Timers/StateTimer" to="." method="_on_StateTimer_timeout"]

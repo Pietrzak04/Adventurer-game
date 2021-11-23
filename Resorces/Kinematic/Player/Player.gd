@@ -69,17 +69,14 @@ func _input(event: InputEvent):
 			double_jump = true
 
 func _process(delta: float):
-	
-	grab(velocity)
 	if current_state == state.ANIMATION:
 		return
 	
 	animation_tree.set("parameters/Movement/current", abs(direction.x) * int(!is_on_wall()))
 	animation_tree.set("parameters/Air/current", int(velocity.y > 0))
 	animation_tree.set("parameters/DoubleJump/current", double_jump)
-
 func _physics_process(delta: float):
-	print(velocity)
+	grab(velocity)
 	match(current_state):
 		state.MOVEMENT:
 			animation_tree.set("parameters/State/current", int(!is_on_floor()))
