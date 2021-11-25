@@ -20,16 +20,19 @@ func _ready():
 	set_time()
 
 func _physics_process(delta: float):
+	flip(direction.x)
 	match(current_state):
 		state.IDLE:
 			animation.play("idle")
 			velocity = calculate_velocity(velocity, direction, speed)
 		state.WALK:
 			animation.play("walk")
-			#if abs(global_position.x - start_point.x) < 100:
+			print(abs(global_position.x - start_point.x))
+			
+			if abs(global_position.x - start_point.x) > 150:
+				direction.x *= -1
+			
 			velocity = calculate_velocity(velocity, direction, speed)
-			#else:
-			#	_on_StateTimer_timeout()
 			
 		state.ATTACK:
 			animation.play("attack")
@@ -48,11 +51,14 @@ func calculate_velocity(linear_velocity: Vector2, direction: Vector2, speed: Vec
 	out.x = direction.x * speed.x
 	out.y += gravity * get_physics_process_delta_time()
 	
+	if (!jump.is_colliding() and jump2.is_colliding() and is_on_floor() and direction.x != 0 and state_timer.time_left > 0.1):
+		out.y = speed.y * -1.0
+	
 	return out
 
 func set_time():
 	rng.randomize()
-	var time = rng.randi_range(1, 2)
+	var time = rng.randi_range(1, 4)
 	state_timer.start(time)
 
 func set_direction():
@@ -67,7 +73,6 @@ func set_direction():
 func _on_StateTimer_timeout():
 	if current_state == state.IDLE:
 		direction.x = float(set_direction())
-		flip(direction.x)
 		current_state = state.WALK
 	elif current_state == state.WALK:
 		direction = Vector2(0.0, 1.0)
@@ -76,8 +81,9 @@ func _on_StateTimer_timeout():
 	set_time()
 
 func flip(direction: float):
-	sprite.scale.x = direction
-	jump.cast_to.x = direction * 10
-	jump2.cast_to.x = direction * 10
-	jump.position.x = direction * 6
-	jump2.position.x = direction * 6
+	if direction != 0:
+		sprite.scale.x = direction
+		jump.cast_to.x = direction * 15
+		jump2.cast_to.x = direction * 15
+		jump.position.x = direction * 6
+		jump2.position.x = direction * 6

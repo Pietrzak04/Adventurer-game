@@ -47,14 +47,14 @@ animations = [ {
 "name": "flip",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "fall",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "jump_loop",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ) ],
@@ -67,9 +67,9 @@ animations = [ {
 "name": "idle_0",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "corner_grab",
+"name": "jump_loop",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ) ],
@@ -77,9 +77,9 @@ animations = [ {
 "name": "run_0",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ) ],
 "loop": true,
-"name": "jump",
+"name": "corner_grab",
 "speed": 5.0
 } ]
 
@@ -148,7 +148,7 @@ input_3/name = "Rope"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=14]
-graph_offset = Vector2( -420.125, 121.456 )
+graph_offset = Vector2( -236, -148 )
 nodes/Air/node = SubResource( 2 )
 nodes/Air/position = Vector2( 460, 200 )
 nodes/CornerClimb/node = SubResource( 4 )
@@ -178,7 +178,7 @@ nodes/Run/position = Vector2( -140, 80 )
 nodes/State/node = SubResource( 13 )
 nodes/State/position = Vector2( 800, 220 )
 nodes/output/position = Vector2( 1100, 220 )
-node_connections = [ "output", 0, "State", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing", "IdleScale", 0, "Idle", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb", "MoveScale", 0, "Run" ]
+node_connections = [ "output", 0, "State", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "IdleScale", 0, "Idle", "MoveScale", 0, "Run", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb" ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2

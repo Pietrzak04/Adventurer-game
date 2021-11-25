@@ -167,7 +167,7 @@ tracks/1/keys = {
 collision_layer = 4
 script = ExtResource( 28 )
 gravity = 650.0
-speed = Vector2( 100, 100 )
+speed = Vector2( 100, 180 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -16 )
@@ -192,12 +192,10 @@ anims/walk = SubResource( 6 )
 
 [node name="JumpDetector" type="RayCast2D" parent="."]
 position = Vector2( 6, -18 )
-cast_to = Vector2( 10, 0 )
-collision_mask = 3
+cast_to = Vector2( 15, 0 )
 
 [node name="JumpDetector2" type="RayCast2D" parent="."]
 position = Vector2( 6, -10 )
-cast_to = Vector2( 10, 0 )
-collision_mask = 3
+cast_to = Vector2( 15, 0 )
 
 [connection signal="timeout" from="Timers/StateTimer" to="." method="_on_StateTimer_timeout"]
