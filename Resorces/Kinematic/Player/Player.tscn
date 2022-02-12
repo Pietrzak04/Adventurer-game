@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Assets/Player/Sprite/adventurer-idle-00.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/Sprite/adventurer-idle-01.png" type="Texture" id=2]
@@ -39,6 +39,16 @@
 [ext_resource path="res://Assets/Player/Sprite/adventurer-smrslt-03.png" type="Texture" id=37]
 [ext_resource path="res://Assets/Player/Sprite/adventurer-smrslt-00.png" type="Texture" id=38]
 [ext_resource path="res://Resorces/Kinematic/Player/Animations/flip.tres" type="Animation" id=39]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-walk-05.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-00.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-01.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-02.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-03.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-walk-01.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-walk-02.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-walk-03.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Player/Sprite/adventurer-crouch-walk-04.png" type="Texture" id=48]
+[ext_resource path="res://Resorces/Camera/camera.gd" type="Script" id=49]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -52,9 +62,9 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 29 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 40 ) ],
 "loop": true,
-"name": "fall",
+"name": "crouch_walk",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 31 ), ExtResource( 30 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 29 ) ],
@@ -62,14 +72,14 @@ animations = [ {
 "name": "corner_climb",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 34 ), ExtResource( 33 ) ],
-"loop": true,
-"name": "idle_0",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "jump_loop",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "corner_grab",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ) ],
@@ -77,11 +87,24 @@ animations = [ {
 "name": "run_0",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"frames": [ ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
 "loop": true,
-"name": "corner_grab",
+"name": "crouch_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 34 ), ExtResource( 33 ) ],
+"loop": true,
+"name": "idle_0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "fall",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 6.66667, 1.74603 )
 
 [sub_resource type="AnimationNodeTransition" id=2]
 input_count = 2
@@ -90,11 +113,21 @@ input_0/auto_advance = false
 input_1/name = "fall"
 input_1/auto_advance = false
 
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "crouch_walk"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "crouch_idle"
+
 [sub_resource type="AnimationNodeAnimation" id=4]
 animation = "corner_climb"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
 animation = "corner_grab"
+
+[sub_resource type="AnimationNodeTimeScale" id=26]
+
+[sub_resource type="AnimationNodeTimeScale" id=27]
 
 [sub_resource type="AnimationNodeTransition" id=18]
 input_count = 2
@@ -133,11 +166,18 @@ input_0/auto_advance = false
 input_1/name = "Run"
 input_1/auto_advance = false
 
+[sub_resource type="AnimationNodeTransition" id=23]
+input_count = 2
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_1/name = "Run"
+input_1/auto_advance = false
+
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "run_0"
 
 [sub_resource type="AnimationNodeTransition" id=13]
-input_count = 4
+input_count = 5
 input_0/name = "Ground"
 input_0/auto_advance = false
 input_1/name = "Air"
@@ -146,19 +186,29 @@ input_2/name = "Climb"
 input_2/auto_advance = false
 input_3/name = "Rope"
 input_3/auto_advance = false
+input_4/name = "Crouch"
+input_4/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=14]
-graph_offset = Vector2( -236, -148 )
+graph_offset = Vector2( 714, 346.5 )
 nodes/Air/node = SubResource( 2 )
 nodes/Air/position = Vector2( 460, 200 )
+nodes/Animation/node = SubResource( 21 )
+nodes/Animation/position = Vector2( 340, 760 )
+"nodes/Animation 2/node" = SubResource( 20 )
+"nodes/Animation 2/position" = Vector2( 340, 900 )
 nodes/CornerClimb/node = SubResource( 4 )
 nodes/CornerClimb/position = Vector2( 320, 620 )
 nodes/CornerGrab/node = SubResource( 5 )
 nodes/CornerGrab/position = Vector2( 320, 500 )
+nodes/CrouchIdleScale/node = SubResource( 26 )
+nodes/CrouchIdleScale/position = Vector2( 560, 760 )
+nodes/CrouchWalkScale/node = SubResource( 27 )
+nodes/CrouchWalkScale/position = Vector2( 560, 900 )
 nodes/DoubleJump/node = SubResource( 18 )
 nodes/DoubleJump/position = Vector2( 106.667, 266.667 )
 nodes/Fall/node = SubResource( 6 )
-nodes/Fall/position = Vector2( 260, 360 )
+nodes/Fall/position = Vector2( 300, 340 )
 nodes/Flip/node = SubResource( 15 )
 nodes/Flip/position = Vector2( -140, 380 )
 nodes/Grabbing/node = SubResource( 17 )
@@ -173,63 +223,166 @@ nodes/MoveScale/node = SubResource( 10 )
 nodes/MoveScale/position = Vector2( 80, 100 )
 nodes/Movement/node = SubResource( 11 )
 nodes/Movement/position = Vector2( 340, 0 )
+nodes/MovementCrouch/node = SubResource( 23 )
+nodes/MovementCrouch/position = Vector2( 780, 820 )
 nodes/Run/node = SubResource( 12 )
 nodes/Run/position = Vector2( -140, 80 )
 nodes/State/node = SubResource( 13 )
-nodes/State/position = Vector2( 800, 220 )
-nodes/output/position = Vector2( 1100, 220 )
-node_connections = [ "output", 0, "State", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "IdleScale", 0, "Idle", "MoveScale", 0, "Run", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb" ]
+nodes/State/position = Vector2( 1280, 360 )
+nodes/output/position = Vector2( 1760, 360 )
+node_connections = [ "output", 0, "State", "IdleScale", 0, "Idle", "State", 0, "Movement", "State", 1, "Air", "State", 2, "Grabbing", "State", 4, "MovementCrouch", "DoubleJump", 0, "JumpLoop", "DoubleJump", 1, "Flip", "CrouchWalkScale", 0, "Animation 2", "MoveScale", 0, "Run", "Air", 0, "DoubleJump", "Air", 1, "Fall", "Grabbing", 0, "CornerGrab", "Grabbing", 1, "CornerClimb", "CrouchIdleScale", 0, "Animation", "Movement", 0, "IdleScale", "Movement", 1, "MoveScale", "MovementCrouch", 0, "CrouchIdleScale", "MovementCrouch", 1, "CrouchWalkScale" ]
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "crouch_idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "crouch_idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "crouch_idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "crouch_walk"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "crouch_walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=29]
+radius = 6.0
+height = 0.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 20 )
 gravity = 650.0
 speed = Vector2( 100, 150 )
-crouch_speed = 20
+crouch_speed = Vector2( 50, 150 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0
+smoothing_enabled = true
+smoothing_speed = 8.0
+script = ExtResource( 49 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -18 )
 frames = SubResource( 1 )
-animation = "jump"
-frame = 3
+animation = "crouch_idle"
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="NormalColision" type="CollisionPolygon2D" parent="."]
+modulate = Color( 0, 0.133333, 1, 1 )
 position = Vector2( 0, -16 )
-polygon = PoolVector2Array( 0, 16, 4, 16, 6, 16, 6, 0, 6, -11, 2.09253, -14.2562, 0, -15, -2.06273, -14.2811, -6, -11, -6, 0, -6, 16, -4, 16 )
+polygon = PoolVector2Array( 0, 16, 4, 16, 6, 16, 6, 0, 6, -11, 3, -14, 0, -15, -3, -14, -6, -11, -6, 0, -6, 16, -4, 16 )
+
+[node name="CrouchColision" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, -11 )
+scale = Vector2( 0.9, 6.3 )
+shape = SubResource( 28 )
+disabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Air/current = 0
+parameters/CrouchIdleScale/scale = 0.6
+parameters/CrouchWalkScale/scale = 0.6
 parameters/DoubleJump/current = 0
 parameters/Grabbing/current = 0
 parameters/IdleScale/scale = 0.6
 parameters/MoveScale/scale = 1.0
 parameters/Movement/current = 0
-parameters/State/current = 1
+parameters/MovementCrouch/current = 0
+parameters/State/current = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
+anims/RESET = SubResource( 25 )
 anims/corner_climb = ExtResource( 32 )
 anims/corner_grab = ExtResource( 25 )
+anims/crouch_idle = SubResource( 19 )
+anims/crouch_walk = SubResource( 24 )
 anims/fall = ExtResource( 19 )
 anims/flip = ExtResource( 39 )
 anims/idle_0 = ExtResource( 16 )
 anims/jump_0 = ExtResource( 17 )
 anims/jump_loop = ExtResource( 18 )
 anims/run_0 = ExtResource( 15 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-process_mode = 0
-drag_margin_left = 0.5
-drag_margin_top = 0.5
-drag_margin_right = 0.5
-drag_margin_bottom = 0.5
 
 [node name="Grabing" type="Node2D" parent="."]
 
@@ -256,3 +409,14 @@ cast_to = Vector2( 0, 5 )
 [node name="GroundRight" type="RayCast2D" parent="Ground"]
 position = Vector2( 5, 0 )
 cast_to = Vector2( 0, 5 )
+
+[node name="CrouchDetector" type="Area2D" parent="."]
+collision_layer = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrouchDetector"]
+position = Vector2( 0, -24 )
+shape = SubResource( 29 )
+
+[connection signal="body_entered" from="CrouchDetector" to="." method="crouchDetector_body_entered"]
+[connection signal="body_exited" from="CrouchDetector" to="." method="crouchDetector_body_exited"]

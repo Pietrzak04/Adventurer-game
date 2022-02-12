@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Enemies/Grum/idle05.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enemies/Grum/idle02.png" type="Texture" id=2]
@@ -163,6 +163,9 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 86, 27.5 )
+
 [node name="Grum" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 28 )
@@ -198,4 +201,16 @@ cast_to = Vector2( 15, 0 )
 position = Vector2( 6, -10 )
 cast_to = Vector2( 15, 0 )
 
+[node name="Detectors" type="Node2D" parent="."]
+
+[node name="PlayerDetector" type="Area2D" parent="Detectors"]
+scale = Vector2( -1, 1 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/PlayerDetector"]
+position = Vector2( -90, -10 )
+shape = SubResource( 7 )
+
 [connection signal="timeout" from="Timers/StateTimer" to="." method="_on_StateTimer_timeout"]
+[connection signal="body_entered" from="Detectors/PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
