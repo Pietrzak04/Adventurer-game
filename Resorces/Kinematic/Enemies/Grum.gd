@@ -103,3 +103,6 @@ func flip(direction: float):
 
 func _on_PlayerDetector_body_entered(body: Node):
 	print(body)
+	
+func hurt():
+	print("aug")

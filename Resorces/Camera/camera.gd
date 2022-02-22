@@ -15,7 +15,7 @@ func _ready():
 	add_child(timer)
 
 func _process(delta: float):
-	if parent.velocity.length() > 0:
+	if parent.velocity.length() > 20:
 		reset_camera()
 
 func _input(event: InputEvent):

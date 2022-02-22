@@ -55,7 +55,7 @@ tracks/3/keys = {
 "args": [ Vector2( 14, 0 ), 100.0 ],
 "method": "in_animation_move"
 }, {
-"args": [  ],
+"args": [ 0 ],
 "method": "animation_ended"
 } ]
 }
